@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Pour Andréa ❤️</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: #000;
+      color: white;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+      height: 100vh;
+      position: relative;
+    }
+
+    .container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      padding: 40px;
+      box-sizing: border-box;
+      position: relative;
+      z-index: 1;
+    }
+
+    .image {
+      width: 300px;
+      height: 300px;
+      background-image: url('https://cdn.discordapp.com/avatars/959747502880469022/dcf192284ac922817052f74a56e89ad2.webp?size=1024');
+      background-size: cover;
+      background-position: center;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+      margin-right: 60px;
+    }
+
+    .texte {
+      font-size: 2em;
+      line-height: 1.2;
+      white-space: pre-line;
+    }
+
+    .heart {
+      position: fixed;
+      top: -10px;
+      z-index: 0;
+      color: red;
+      user-select: none;
+      pointer-events: none;
+      animation-name: fall;
+      animation-timing-function: linear;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* Conteneur boutons en bas */
+    #buttonsContainer {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      display: flex;
+      gap: 15px;
+    }
+
+    /* Style boutons */
+    button {
+      background-color: #ff3366;
+      border: none;
+      border-radius: 25px;
+      padding: 12px 25px;
+      font-size: 18px;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(255, 51, 102, 0.6);
+      user-select: none;
+      transition: background-color 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    button:hover {
+      background-color: #e62e5c;
+    }
+
+    /* Bouton Replay - carré avec icône */
+    #replayButton {
+      width: 50px;
+      padding: 0;
+      border-radius: 50%;
+    }
+
+    /* Icône flèche ronde */
+    svg {
+      width: 24px;
+      height: 24px;
+      fill: white;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Musique de fond -->
+  <audio id="backgroundMusic" loop>
+    <source src="c:\Users\shiro\Downloads\Hamza - KYKY2BONDY (Clip Officiel).mp3" type="audio/mpeg" />
+    Ton navigateur ne supporte pas l'audio HTML.
+  </audio>
+
+  <div class="container">
+    <div class="image"></div>
+    <div class="texte">
+      Andréa lpb<br />
+      Andréa lpb<br />
+      Andréa lpb<br />
+      Andréa lpb<br />
+      Andréa lpb<br />
+      Andréa lpb
+    </div>
+  </div>
+
+  <!-- Cœurs qui tombent -->
+  <script>
+    const heartCount = 100;
+    for (let i = 0; i < heartCount; i++) {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+      heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+      heart.textContent = '❤️';
+      heart.style.animationDelay = Math.random() * 5 + 's';
+      document.body.appendChild(heart);
+    }
+  </script>
+
+  <!-- Conteneur des boutons Play et Replay -->
+  <div id="buttonsContainer">
+    <button id="playButton">Play</button>
+    <button id="replayButton" title="Replay">
+      <svg viewBox="0 0 24 24" >
+        <path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6a6 6 0 0 1-6 6c-3.31 0-6-2.69-6-6H4a8 8 0 0 0 8 8 8 8 0 0 0 8-8c0-4.42-3.58-8-8-8z"/>
+      </svg>
+    </button>
+  </div>
+
+  <script>
+    const music = document.getElementById('backgroundMusic');
+    const playButton = document.getElementById('playButton');
+    const replayButton = document.getElementById('replayButton');
+
+    playButton.addEventListener('click', () => {
+      if (music.paused) {
+        music.play();
+        playButton.textContent = 'Pause';
+      } else {
+        music.pause();
+        playButton.textContent = 'Play';
+      }
+    });
+
+    replayButton.addEventListener('click', () => {
+      music.currentTime = 0; // remet au début
+      music.play();
+      playButton.textContent = 'Pause';
+    });
+  </script>
+
+</body>
+</html>
